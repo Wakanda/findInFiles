@@ -1,0 +1,194 @@
+﻿<!--
+* This file is part of Wakanda software, licensed by Wakanda under
+*  (i) the GNU General Public License version 3 (GNU GPL v3), or
+*  (ii) the Affero General Public License version 3 (AGPL v3) or
+*  (iii) a commercial license.
+* This file remains the exclusive property of Wakanda and/or its licensors
+* and is protected by national and international legislations.
+* In any event, Licensee's compliance with the terms and conditions
+* of the applicable license constitutes a prerequisite to any use of this file.
+* Except as otherwise expressly stated in the applicable license,
+* such license does not include any other license or rights on this file,
+* Wakanda's and/or its licensors' trademarks and/or other proprietary rights.
+* Consequently, no title, copyright or other proprietary rights
+* other than those specified in the applicable license is granted.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Find in Files</title>
+    <link rel="stylesheet" href="findInFiles.css">
+</head>
+<body>
+    <section style="
+        height: 100%;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;">
+        <header id="selector">
+            <ul id="sddm" style="position:absolute; top:94px; left:16px;">
+                <li>
+                    <a href="#"
+                       onmouseover="adjustFileTypesMenus(); mopen('fileTypesMenu');"
+                       onmouseout="mclosetime()"></a>
+                    <div id="fileTypesMenu" onmouseover="mcancelclosetime()"
+                         onmouseout="mclosetime()">
+                        <div id="fileTypesMenuPlaceHolder"></div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul id="sddm" style="position:absolute; top:56px; left:16px;">
+                <li>
+                    <a href="#"
+                       onmouseover="adjustWhereMenus(); mopen('whereMenu');"
+                       onmouseout="mclosetime()"></a>
+                    <div id="whereMenu" onmouseover="mcancelclosetime()"
+                         onmouseout="mclosetime()">
+                        <a href="#" onclick="setMode('allOpenedDocuments');"><span id="allOpenedDocuments" style="display: inline-block; width: 16px"></span><span>All Opened Documents</span></a>
+                        <a href="#" onclick="setMode('solution');"><span id="solution" style="display: inline-block; width: 16px"></span><span>Whole Solution</span></a>
+                        <a href="#" class="separator" style="border-top: 1px solid #e8e8e8" />
+                        <a href="#" class="separator" style="color:#aaa"><span id="wholeWord" style="display: inline-block; width: 5px"></span><span>Projects</span></a>
+                        <div id="projects"></div>
+                        <a href="#" class="separator" style="border-top: 1px solid #e8e8e8" />
+                        <a href="#" onclick="setMode('folder');"><span id="folder" style="display:inline-block;width:16px"></span><span>Specific Folder</span></a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul id="sddm" style="position:absolute; top:18px; left:16px;">
+                <li>
+                    <a href="#"
+                       onmouseover="adjustOptionsMenus(); mopen('optionsMenu');"
+                       onmouseout="mclosetime()"></a>
+                    <div id="optionsMenu" onmouseover="mcancelclosetime()"
+                         onmouseout="mclosetime()">
+                        <a href="#" onclick="options.caseSensitive = !options.caseSensitive;"><span id="caseSensitive" style="display:inline-block;width:16px"></span><span>Case Sensitive</span></a>
+                        <a href="#" onclick="options.wholeWord = !options.wholeWord;"><span id="wholeWord" style="display: inline-block; width: 16px"></span><span>Whole Word</span></a>
+                        <a href="#" class="separator" style="border-top: 1px solid #e8e8e8" />
+                        <a href="#" onclick="setPatternType('plainText')"><span id="plainText" style="display: inline-block; width: 16px"></span><span>Plain Text</span></a>
+                        <a href="#" onclick="setPatternType('wildCards')"><span id="wildCards" style="display: inline-block; width: 16px"></span><span>WildCards</span></a>
+                        <a href="#" onclick="setPatternType('regularExpression')"><span id="regularExpression" style="display: inline-block; width: 16px"></span><span>Regular Expression</span></a>
+                        <a href="#" class="separator" style="border-top: 1px solid #e8e8e8" />
+                        <a href="#" class="separator" style="color:#aaa"><span id="wholeWord" style="display: inline-block; width: 5px"></span><span>Recent Searches</span></a>
+                        <div id="recentSearches"></div>
+                    </div>
+                </li>
+            </ul>
+
+            <div style="clear:both"> </div>
+
+            <table class="topPanel">
+                <tr>
+                    <td class="editAreaHolder">
+                        <div class="wrapper">
+                            <div class="editArea" id="toSearch">
+                                <input class="inputArea"
+                                       onblur="document.getElementById('toSearch').style.border = '1px solid #cdcdcd';"
+                                       onfocus="document.getElementById('toSearch').style.border = '1px solid #3fa0fb';"
+                                       id="toSearchInput"
+                                       placeholder="Enter text to search..." />
+                                <span id="patternType" class="patternType"></span>
+                            </div>
+
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="ffButton" id="findButton" onclick="find();"></div>
+                    </td>
+                    <td>
+                        <div class="ffButton" id="findAllButton" onclick="findAll();">Find All</div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="editAreaHolder">
+                        <div class="wrapper">
+                            <div class="editArea" id="where">
+                                <input class="inputArea"
+                                       onblur="document.getElementById('where').style.border = '1px solid #cdcdcd';"
+                                       onfocus="document.getElementById('where').style.border = '1px solid #3fa0fb';"
+                                       id="destinationInput"
+                                       placeholder="Enter folder to search in or click Browse button..."
+                                       value="Search in Whole Solution"
+                                       readonly="readonly" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ffButton" id="browseButton" onclick="browse();">...</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editAreaHolder">
+                        <div class="wrapper">
+                            <div class="editArea" id="fileTypes">
+                                <input class="inputArea"
+                                       onblur="document.getElementById('fileTypes').style.border = '1px solid #cdcdcd';"
+                                       onfocus="document.getElementById('fileTypes').style.border = '1px solid #3fa0fb';"
+                                       id="fileTypesInput"
+                                       placeholder="*.js;*.html;*.css" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </header>
+
+        <table id="resultsBar" class="bar">
+            <tr>
+                <td style="width: 50px; height: 22px;">
+                    <div style="position: relative; padding: 0; margin: 3px 17px 3px 17px;">
+                        <img id="spinner" src="images/loader.gif" />
+                    </div>
+                </td>
+                <td style="width: 20px; height: 22px;">
+                    <div class="button" onclick="firstPage();" style="position: relative; padding: 0; margin: 3px 3px 3px 3px;">
+                        <img src="images/arrow_beginning.png" />
+                    </div>
+                </td>
+                <td style="width: 20px; height: 22px;">
+                    <div class="button" onclick="previousPage();" style="position: relative; padding: 0; margin: 3px 3px 3px 3px;">
+                        <img src="images/arrow_previous.png" />
+                    </div>
+                </td>
+                <td style="width: 50px; height: 22px;">
+                    <div id="pageCounter" style="position: relative; padding: 0; margin: 3px 17px;">
+                        1/1
+                    </div>
+                </td>
+                <td style="width: 20px; height: 22px;">
+                    <div class="button" onclick="nextPage();" style="position: relative; padding: 0; margin: 3px 3px 3px 3px;">
+                        <img src="images/arrow_next.png" />
+                    </div>
+                </td>
+                <td style="width: 20px; height: 22px;">
+                    <div class="button" onclick="lastPage();" style="position: relative; padding: 0; margin: 3px 3px 3px 3px;">
+                        <img src="images/arrow_end.png" />
+                    </div>
+                </td>
+                <td style="height: 22px;">
+                    <div id="resultsCounter" style="position: relative; width: 150px; padding: 0; margin: 3px 17px;">
+                        0 results found
+                    </div>
+                </td>
+                <td style="width:100%"></td>
+            </tr>
+        </table>
+        <div id="scrollBox" class="scrollbox" style="overflow-y: auto; -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1">
+            <div id="resultsTable" class="results">
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<script src="shortcut.js"></script>
+<script src="findInFiles.js"></script>

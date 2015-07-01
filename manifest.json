@@ -1,0 +1,32 @@
+{
+    "extension": 
+    {
+        "name": "Find in Files",
+        "version": "1.0.0",
+        "description": "An internal extension of Studio for the Find in Files",
+        "icon": "findInFiles.png",
+		"senders": [
+			{
+				"location": "studioToolbar", 
+				"tips": "Find in Files",
+				"icon": "findInFiles.png",
+				"title": "Find in Files",
+				"actionName": "findInFiles"
+			}
+		],
+        "actions": [
+                    {
+                        "name": "findInFiles",
+                        "title": "Find in Files"
+                    },
+					{
+						"name": "initFindInFiles",
+						"title": "Init Find in Files",
+						"trigger": [
+							{ "event": "onStudioStart" }
+						]
+					}
+        ],
+        "lifetime": "application_lifetime"
+    }
+}
