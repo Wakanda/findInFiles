@@ -27,7 +27,7 @@ exports.handleMessage = function handleMessage(message) {
 
 	if (message.action == 'findInFiles')
 	{
-	    studio.extension.openPageInTab('index.html', 'Find in Files', false, false, false, 'studio::FindInFiles');
+	    studio.extension.openPageInTab('index.html', 'Find in Files', true, false, false, 'studio::FindInFiles');
 	}
 	else if (message.action == 'initFindInFiles')
 	{

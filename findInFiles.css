@@ -1,18 +1,39 @@
 html, body {
-    height: 100%;
     -webkit-user-select: none;
     user-select: none;
 }
 
 body {
-    font-family: "Arial";
-    font-size: 13px;
+    min-width: 440px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
     color: #3d4246;
     background-color: #f8f8f8;
     border: none;
     border-width: 0;
     margin: 0;
-    overflow: hidden;
+}
+
+input {
+    font-size: 13px;
+}
+
+::-webkit-input-placeholder {
+    color: #808386;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #808386;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #808386;
+}
+
+:-ms-input-placeholder {
+    color: #808386;
 }
 
 #selector {
@@ -41,98 +62,140 @@ body {
 }
 
 .editArea {
-    height: 24px;
+    height: 36px;
     margin: 0;
     border: 1px solid #cdcdcd;
     background-color: #ffffff;
     margin-top: 5px;
-    margin-bottom: 5px;
+    position: relative;
+}
+
+.editArea2 {
+    height: 36px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: #f0f1f2;
+    margin-top: 5px;
     position: relative;
 }
 
 .inputArea {
-    position:absolute;
+    position: absolute;
     outline: none;
     left: 20px;
-    top: 0px;
-    right: 140px;
+    right: 10px;
+    top: 6px;
     border: none;
+    color: #555;
 }
 
-.patternType{
-    position:absolute;
-    border: none;
-    color: #cdcdcd;
+.inputArea.plainText {}
+
+.inputArea.regularExpression {
+    right: 130px;
+}
+
+.inputArea.wildCards {
+    right: 80px;
+}
+
+.inputArea2 {
+    position: absolute;
+    outline: none;
+    left: 20px;
+    top: 6px;
     right: 10px;
-    top: 3px;
+    border: none;
+    color: #555;
+}
+
+.inputArea3 {
+    position: absolute;
+    outline: none;
+    background-color: transparent;
+    left: 20px;
+    top: 6px;
+    right: 10px;
+    border: none;
+    color: #808386;
+}
+
+.inputArea3.inactive {
+    color: #000000;
+}
+
+.inputArea4 {
+    position: absolute;
+    outline: none;
+    background-color: transparent;
+    left: 20px;
+    top: 6px;
+    right: 10px;
+    border: none;
+    color: #000000;
+}
+
+.patternType {
+    position: absolute;
+    border: none;
+    color: #808080;
+    right: 10px;
+    top: 11px;
     width: 130px;
     display: block;
     text-align: right;
 }
 
 .ffButton {
-    height: 24px;
-    border: 1px solid #cdcdcd;
+    background-color: #e3e5e6;
+    color: #555;
+    text-align: center;
+    height: 36px;
+    line-height: 36px;
+    margin: 5px 5px 0 0;
+    transition: all .15s ease-in;
+}
+
+.ffButton:hover {
+    background-color: #a6aaab;
+    color: #fff;
+    cursor: pointer;
+}
+
+.ffButton:active {
+    background-color: #808386;
+    cursor: pointer;
 }
 
 #browseButton {
     width: 24px;
-    height: 19px;
-    background-color: #f3f3f3;
-    text-align: center;
-    padding-top: 5px;
+    border-radius: 0;
 }
-
-    #browseButton:hover {
-        background-color: #fefefe;
-        cursor: pointer;
-    }
-
-    #browseButton:active {
-        background-color: #aaa;
-        cursor: pointer;
-    }
 
 #findButton {
-    width: 24px;
-    height: 24px;
-    background: url("images/arrowNext.png") no-repeat 50% 50%;
-    background-color: #f3f3f3;
+    width: 100px;
 }
-
-    #findButton:hover {
-        background-color: #fefefe;
-        cursor: pointer;
-    }
-
-    #findButton:active {
-        background-color: #aaa;
-        cursor: pointer;
-    }
 
 #findAllButton {
-    width: 70px;
-    height: 19px;
-    background-color: #f3f3f3;
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-    padding-top: 5px;
+    width: 120px;
+    /*margin-left: 5px;
+    margin-right: 5px;*/
 }
 
-    #findAllButton:hover {
-        background-color: #fefefe;
-        cursor: pointer;
-    }
+#replaceButton {
+    width: 100px;
+}
 
-    #findAllButton:active {
-        background-color: #aaa;
-        cursor: pointer;
-    }
+#replaceAllButton {
+    width: 120px;
+    /*margin-left: 5px;
+    margin-right: 5px;*/
+}
 
 .editAreaHolder .wrapper {
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 5px;
 }
 
 #sddm {
@@ -141,61 +204,77 @@ body {
     z-index: 30;
 }
 
-    #sddm li {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        float: left;
-    }
+#sddm li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+}
 
-        #sddm li a {
-            display: block;
-            margin: 0 1px 0 0;
-            padding: 0px 0px;
-            width: 10px;
-            height: 10px;
-            background: none;
-            color: #FFF;
-            text-align: center;
-            text-decoration: none;
-            background: url("images/menuArrow.png") no-repeat 50% 50%;
-        }
+#sddm li a {
+    display: block;
+    margin: 0 1px 0 0;
+    padding: 0px 0px;
+    width: 10px;
+    height: 10px;
+    background: none;
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
+    background: url("images/menuArrow.png") no-repeat 50% 50%;
+}
 
 #optionsMenu {
     position: absolute;
+    left: -5px;
     visibility: hidden;
     margin: 0;
-    padding: 0;
-    background: #EAEBD8;
-    border: 1px solid #808080;
-    box-shadow: 2px 2px 2px #aaa;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;
+}
+
+#replaceMenu {
+    position: absolute;
+    left: -5px;
+    visibility: hidden;
+    margin: 0;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;
 }
 
 #whereMenu {
     position: absolute;
+    left: -5px;
     visibility: hidden;
     margin: 0;
-    padding: 0;
-    background: #EAEBD8;
-    border: 1px solid #808080;
-    box-shadow: 2px 2px 2px #aaa;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;
 }
 
 #fileTypesMenu {
     position: absolute;
+    left: -5px;
     visibility: hidden;
     margin: 0;
-    padding: 0;
-    background: #EAEBD8;
-    border: 1px solid #808080;
-    box-shadow: 2px 2px 2px #aaa;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid #cdcdcd;
 }
 
 #sddm div a {
     position: relative;
     display: block;
     margin: 0;
-    padding: 2px 10px;
+    padding: 10px;
     width: auto;
     white-space: nowrap;
     text-align: left;
@@ -205,29 +284,27 @@ body {
     color: #000000;
 }
 
-    #sddm div a:hover:not(.separator) {
-        background: #49A3FF;
-        color: #FFF;
-    }
-
+#sddm div a:hover:not(.separator) {
+    background: #49A3FF;
+    color: #FFF;
+}
 
 .bar {
     width: 100%;
-    height: 22px;
+    height: 38px;
     border: none;
     border-width: 0;
     border-bottom: solid;
     border-bottom-width: 1px;
     border-bottom-color: #cdcdcd;
-    background-color: #f1f1f1;
+    background-color: #383b3e;
+    color: #fff;
     border-spacing: 0;
     padding: 0;
     visibility: hidden;
 }
 
-
-.block table {
-}
+.block table {}
 
 .block.collapse table {
     display: none;
@@ -244,20 +321,20 @@ body {
     float: left;
 }
 
-    .block .collapseButton:hover {
-        background-color: #f5f5f5;
-    }
+.block .collapseButton:hover {
+    background-color: #f5f5f5;
+}
 
-    .block .collapseButton:active {
-        background-color: #c5c5c5;
-    }
+.block .collapseButton:active {
+    background-color: #c5c5c5;
+}
 
 .block.collapse .collapseButton {
     background-image: url("images/folded.png");
 }
 
-
 .results {
+    overflow: hidden;
     position: relative;
     width: 100%;
     border: none;
@@ -268,14 +345,13 @@ body {
     padding: 5px;
 }
 
-
 .button img {
-    border-radius: 3px;
+    border-radius: 2px;
     padding: 5px;
 }
 
 .button:hover img {
-    background-color: #f5f5f5;
+    background-color: #2b2d2f;
     cursor: pointer;
 }
 
@@ -286,21 +362,12 @@ body {
 
 .file {
     border: none;
-    border-width: 0;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: #cdcdcd;
-    background-color: #e0e0e0;
+    background-color: #f0f1f2;
     border-spacing: 0;
-    padding: 0;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding: 8px 5px;
+    position: relative;
+    line-height: 16px;
 }
-
-    .file img {
-        margin-top: 3px;
-        margin-bottom: -3px;
-    }
 
 .tableBlock {
     padding: 0;
@@ -310,50 +377,107 @@ body {
     font-size: 0.9em;
 }
 
-    .tableBlock table {
-        border-collapse: collapse;
-    }
+.tableBlock table {
+    border-collapse: collapse;
+}
 
-    .tableBlock td {
-        border: none;
-        padding: 3px 0px;
-        border-spacing: 0;
-    }
+.tableBlock td {
+    border: none;
+    padding: 3px 0px;
+    border-spacing: 0;
+    font-size: 12px;
+}
 
-        .tableBlock td:first-child {
-            text-align: right;
-            width: 40px;
-        }
+.tableBlock td:first-child {
+    text-align: right;
+    width: 40px;
+}
 
-        .tableBlock td + td {
-            padding: 3px 25px;
-        }
+.tableBlock td + td {
+    padding: 3px 50px;
+}
 
-    .tableBlock tr {
-        border: none;
-        border-width: 0;
-        border-bottom: solid;
-        border-bottom-width: 1px;
-        border-bottom-color: #e2e2e2;
-        cursor: pointer;
-    }
+.tableBlock td span {
+    padding: 4px 1px;
+    color: #fff;
+    border-radius: 2px;
+}
 
-    .tableBlock tr {
-        background-color: #f8f8f8;
-    }
+.tableBlock tr {
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+}
 
-        .tableBlock tr:hover {
-            background-color: #e5e5e5;
-        }
+.tableBlock tr {
+    background-color: #fff;
+    height: 28px;
+}
 
-        .tableBlock tr:active {
-            background-color: #dbdbdb;
-        }
+.tableBlock tr:hover {
+    background-color: #f1f1f1;
+    border: 1px 0 1px 0 solid #cdcdcd;
+}
 
-        .tableBlock tr.selected {
-            background-color: #dbdbdb;
-        }
+.tableBlock tr:active {
+    background-color: #eaeaea;
+}
+
+.tableBlock tr.selected {
+    background-color: #eaeaea;
+}
 
 .withLogo {
-    background: url("images/logoBackground.png") no-repeat 50% 50% fixed;
+    /*min-height: 400px;
+    height: 100%;
+    background: url("images/logoBackground.png") no-repeat 50% 30%;*/
+}
+
+#resultsNotFound {
+    display: none;
+    padding: 20px;
+}
+
+#resultsNotFound p {
+    margin: 0;
+}
+
+#resultsNotFoundKey {
+    font-weight: bold;
+}
+
+.scrollbox {
+    overflow: hidden;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.scrollbox.active {
+    background: white;
+}
+
+.file .collapseButton + img {
+    position: absolute;
+    top: 8px;
+    left: 25px;
+}
+
+.collapseButton {
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+
+.path {
+    box-sizing: border-box;
+    padding-left: 40px;
+    width: 100%;
+}
+
+.path span {
+    display: inline-block;
 }
