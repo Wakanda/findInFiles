@@ -363,8 +363,8 @@ function fillPage(previousNbResults) {
                     resultPath = resultPath.split('\\');
                     resultPath.forEach(function(subPath, i) {
                         resultPathString += '<span>' + subPath + '</span>';
-                        if (i < resultPath.length) {
-                            resultPathString += '<span>\</span>';
+                        if (i < resultPath.length - 1) {
+                            resultPathString += '<span>\\</span>';
                         }
                     });
                 }
