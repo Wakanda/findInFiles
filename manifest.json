@@ -1,23 +1,20 @@
 {
-    "extension": 
-    {
-        "name": "Find in Files",
-        "version": "1.0.0",
-        "description": "A Wakanda Studio extension that allows you to search for a text in one or more files in your project, solution, or specific folder.",
-        "icon": "findInFiles.png",
-        "actions": [
-                    {
-                        "name": "findInFiles",
-                        "title": "Find in Files"
-                    },
-					{
-						"name": "initFindInFiles",
-						"title": "Init Find in Files",
-						"trigger": [
-							{ "event": "onStudioStart" }
-						]
-					}
-        ],
-        "lifetime": "application_lifetime"
-    }
+  "extension": {
+    "name": "FindInFiles",
+    "title": "Find in Files",
+    "version": "1.0.1",
+    "description": "A Wakanda Studio extension that allows you to search for a text in one or more files in your project, solution, or specific folder.",
+    "icon": "findInFiles.png",
+    "actions": [{
+      "name": "findInFiles",
+      "title": "Find in Files"
+    }, {
+      "name": "initFindInFiles",
+      "title": "Init Find in Files",
+      "trigger": [{
+        "event": "onStudioStart"
+      }]
+    }],
+    "lifetime": "application_lifetime"
+  }
 }
